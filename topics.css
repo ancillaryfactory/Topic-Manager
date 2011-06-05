@@ -1,0 +1,13 @@
+#addTopicForm, #sendMessageForm {display:none;margin-bottom:40px}
+
+
+
+#topicTableHeader th {background:#d8d8d8;padding:5px}
+
+.rowHover {background:#efefef}
+
+.wrap p label {font-weight:bold}
+
+#optionMenu {float:right;margin-right:20px;margin-top:3px}
+
+#statusTableForm {background:#efefef;padding:8px;margin-bottom:10px}
