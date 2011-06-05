@@ -1,43 +1,85 @@
 <?php
+
 /*
+
 Plugin Name: Topic Manager
+
 Description: Manages topic assignments for multiple authors
+
 Version: 1.3
+
 Author: AOA
+
 Author URI: http://www.aoa.org
+
 License: GPL2
+
+
 
 Copyright 2011  AOA  (email : jsschwab@aoa.org)
 
+
+
     This program is free software; you can redistribute it and/or modify
+
     it under the terms of the GNU General Public License, version 2, as 
+
     published by the Free Software Foundation.
 
+
+
     This program is distributed in the hope that it will be useful,
+
     but WITHOUT ANY WARRANTY; without even the implied warranty of
+
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+
     GNU General Public License for more details.
 
+
+
     You should have received a copy of the GNU General Public License
+
     along with this program; if not, write to the Free Software
+
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
 */
 
 
+
+
+
 /*
+
 To do:
+
+
+
 
 
 - function to edit authors from table
 
+
+
 - add uninstall function
 
+
+
 - create front-end page for logged in users
+
 	- redirect to template file
+
+
 
 -find way to show description (notes)
 
+
+
 */
+
+
+
 
 
 // Add settings link on plugin page
@@ -177,7 +219,7 @@ if (isset($_GET['status'])) {
 		
 	</form>
 	</div> <!-- end addTopicForm -->
-
+	
 	
 	<!-- Send Message Form -->
 	<div id="sendMessageForm">
@@ -201,9 +243,8 @@ if (isset($_GET['status'])) {
 	
 	<!-- End Send Message Form -->
 	
-	
+<?php if (!isset($_GET['topic'])) { ?> <!-- don't show table on topic edit pages -->	
 	<!-- Main Table starts here -->
-<?php if (!isset($_GET['topic'])) { ?> <!-- don't show table on topic edit pages -->
 	<table class="widefat" cellpadding="15" id="topicTable">
 		<thead>
 		<tr id="topicTableHeader">
