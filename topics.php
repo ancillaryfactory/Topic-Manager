@@ -472,14 +472,20 @@ if (isset($_POST['deleteSubmit'])) {
 function topics_admin_actions() {  
 	$page = add_menu_page( "Topic Manager", "Topic Manager", "edit_posts", "topics", "topics_admin", "", 30 ); 
 	add_action( "admin_print_scripts-$page", 'topics_admin_init' );
+	add_action( "admin_print_styles-$page", 'topics_admin_register_head' );
 	
 }  
 
-function admin_register_head() {
-    $siteurl = get_option('siteurl');
-    $url = $siteurl . '/wp-content/plugins/' . basename(dirname(__FILE__)) . '/topics.css';
-    echo "<link rel='stylesheet' type='text/css' href='$url' />\n";
+function topics_admin_register_head() {
+	$pluginfolder = get_bloginfo('url') . '/' . PLUGINDIR . '/' . dirname(plugin_basename(__FILE__));
+	wp_enqueue_style('jquery.ui.theme', $pluginfolder . '/smoothness/jquery-ui-1.8.12.custom.css');
+	wp_enqueue_style('topicStyle', $pluginfolder . '/topics.css');
+	
+  // $siteurl = get_option('siteurl');
+   // $url = $siteurl . '/wp-content/plugins/' . basename(dirname(__FILE__)) . '/topics.css';
+   // echo "<link rel='stylesheet' type='text/css' href='$url' />\n";
 }
+
 
 // adds jQuery UI datepicker
 function topics_admin_init() {
@@ -487,9 +493,7 @@ function topics_admin_init() {
 	wp_enqueue_script('jquery');
 	wp_enqueue_script('jquery-ui-core');
 	wp_enqueue_script('jquery-ui-datepicker', $pluginfolder . '/jquery.ui.datepicker.min.js', array('jquery', 'jquery-ui-core') );
-	wp_enqueue_style('jquery.ui.theme', $pluginfolder . '/smoothness/jquery-ui-1.8.12.custom.css');
-
-	wp_enqueue_style('topicStyle', $pluginfolder . '/topics.css');
+	
 }
 
 // add_action('admin_init', 'topics_admin_init');
@@ -563,7 +567,7 @@ function topics_admin_footer() {
 }
 add_action('admin_footer', 'topics_admin_footer');
 
-add_action('admin_head', 'admin_register_head');
+// add_action('admin_head', 'admin_register_head');
 
 add_action('admin_menu', 'topics_admin_actions');
 
