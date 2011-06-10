@@ -3,83 +3,43 @@
 /*
 
 Plugin Name: Topic Manager
-
 Description: Manages topic assignments for multiple authors
-
-Version: 1.3
-
+Version: 1.45
 Author: AOA
-
 Author URI: http://www.aoa.org
-
 License: GPL2
-
 
 
 Copyright 2011  AOA  (email : jsschwab@aoa.org)
 
-
-
     This program is free software; you can redistribute it and/or modify
-
-    it under the terms of the GNU General Public License, version 2, as 
-
+	it under the terms of the GNU General Public License, version 2, as 
     published by the Free Software Foundation.
 
-
-
     This program is distributed in the hope that it will be useful,
-
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See th
     GNU General Public License for more details.
 
-
-
     You should have received a copy of the GNU General Public License
-
     along with this program; if not, write to the Free Software
-
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-*/
-
-
-
-
-
-/*
 
 To do:
 
 
-
-
-
 - function to edit authors from table
 
-
-
 - add uninstall function
-
-
 
 - create front-end page for logged in users
 
 	- redirect to template file
 
-
-
 -find way to show description (notes)
 
-
-
 */
-
-
-
 
 
 // Add settings link on plugin page
@@ -481,90 +441,16 @@ function topics_admin_register_head() {
 	wp_enqueue_style('jquery.ui.theme', $pluginfolder . '/smoothness/jquery-ui-1.8.12.custom.css');
 	wp_enqueue_style('topicStyle', $pluginfolder . '/topics.css');
 	
-  // $siteurl = get_option('siteurl');
-   // $url = $siteurl . '/wp-content/plugins/' . basename(dirname(__FILE__)) . '/topics.css';
-   // echo "<link rel='stylesheet' type='text/css' href='$url' />\n";
 }
 
 
 // adds jQuery UI datepicker
 function topics_admin_js() {
 	$pluginfolder = get_bloginfo('url') . '/' . PLUGINDIR . '/' . dirname(plugin_basename(__FILE__));
-//	wp_enqueue_script('jquery');
-//	wp_enqueue_script('jquery-ui-core');
 	wp_enqueue_script('jquery-ui-datepicker', $pluginfolder . '/jquery.ui.datepicker.min.js', array('jquery', 'jquery-ui-core'), 1, true );
+	wp_enqueue_script('topics-js', $pluginfolder . '/topics.js', 'jquery', 1.0, true );
 	
 }
-
-
-function topics_admin_footer() {
-	?>
-	<script type="text/javascript">
-	jQuery(document).ready(function(){
-		jQuery('.datePicker').datepicker({
-			dateFormat : 'mm/dd/yy'
-		});
-		
-		// shows/hides add new topic form
-		jQuery('#addNewLink').click(function() {
-			jQuery('#sendMessageForm').slideUp();
-			jQuery('#addTopicForm').slideToggle();
-			return false;
-		});
-		
-		jQuery('#sendMessageLink').click(function() {
-			jQuery('#addTopicForm').slideUp();
-			jQuery('#sendMessageForm').slideToggle();
-			return false;
-		});
-		
-		
-		jQuery('#cancelAdd').click(function() {
-			jQuery('#addTopicForm').slideUp();
-			return false;
-		});
-		
-		jQuery('#cancelSend').click(function() {
-			jQuery('#sendMessageForm').slideUp();
-			return false;
-		});
-		
-		// adds main table stripe on hover
-		jQuery('#topicTable tr').hover(
-		function() {
-			jQuery(this).addClass('rowHover');
-		},
-		function() {
-			jQuery(this).removeClass('rowHover');
-		}
-		);
-		
-		jQuery('#deleteSubmit').click(function() {
-			var answer = confirm('Delete this topic?');
-			if (!(answer)) { return false };
-		});
-		
-	//	jQuery('#editForm').submit(function() {
-    //var content = jQuery('#pearlContent').val();
-			
-   // if ( content == '') {
-	//jQuery('#titleError').show();
-   // }
-
-
-// removes error message
-//jQuery('#pearlContent').keyup(function() {
-//	var content = jQuery('#pearlContent').val();
-//	if ( content != '') {
-//		jQuery('#contentError').slideUp();
-//	}
-
-		
-	});
-	</script>
-	<?php
-}
-add_action('admin_footer', 'topics_admin_footer');
 
 
 add_action('admin_menu', 'topics_admin_actions');
