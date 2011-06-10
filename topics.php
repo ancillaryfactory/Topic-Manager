@@ -471,7 +471,7 @@ if (isset($_POST['deleteSubmit'])) {
 
 function topics_admin_actions() {  
 	$page = add_menu_page( "Topic Manager", "Topic Manager", "edit_posts", "topics", "topics_admin", "", 30 ); 
-	add_action( "admin_print_scripts-$page", 'topics_admin_init' );
+	add_action( "admin_print_scripts", 'topics_admin_js' );
 	add_action( "admin_print_styles-$page", 'topics_admin_register_head' );
 	
 }  
@@ -488,15 +488,14 @@ function topics_admin_register_head() {
 
 
 // adds jQuery UI datepicker
-function topics_admin_init() {
+function topics_admin_js() {
 	$pluginfolder = get_bloginfo('url') . '/' . PLUGINDIR . '/' . dirname(plugin_basename(__FILE__));
-	wp_enqueue_script('jquery');
-	wp_enqueue_script('jquery-ui-core');
-	wp_enqueue_script('jquery-ui-datepicker', $pluginfolder . '/jquery.ui.datepicker.min.js', array('jquery', 'jquery-ui-core') );
+//	wp_enqueue_script('jquery');
+//	wp_enqueue_script('jquery-ui-core');
+	wp_enqueue_script('jquery-ui-datepicker', $pluginfolder . '/jquery.ui.datepicker.min.js', array('jquery', 'jquery-ui-core'), 1, true );
 	
 }
 
-// add_action('admin_init', 'topics_admin_init');
 
 function topics_admin_footer() {
 	?>
@@ -567,7 +566,6 @@ function topics_admin_footer() {
 }
 add_action('admin_footer', 'topics_admin_footer');
 
-// add_action('admin_head', 'admin_register_head');
 
 add_action('admin_menu', 'topics_admin_actions');
 
