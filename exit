@@ -1,0 +1,29 @@
+[33mcommit 37e566fe1b3d9e27e10e32bb8062ce49cfa0b5e8[m
+Author: rockgod100 <jon@ancillaryfactory.com>
+Date:   Thu Jun 9 20:19:30 2011 -0500
+
+    Moved footer js to separate file.
+
+[33mcommit da700c786a2ffe112d105d8b14cfa56e18d83b3f[m
+Author: rockgod100 <jon@ancillaryfactory.com>
+Date:   Thu Jun 9 19:14:58 2011 -0500
+
+    Datepicker js moved to footer. For some reason, making it only load on the Topics page is breaking the WP widget dropdowns in the left columm, so it is temporarily disabled.
+
+[33mcommit e76e7321b4a2e70904ce693f8d71aebd0b31e084[m
+Author: rockgod100 <jon@ancillaryfactory.com>
+Date:   Thu Jun 9 09:18:47 2011 -0500
+
+    Topics.css only added on plugin page
+
+[33mcommit a55d4c65233a609a4b40547fbc6455f6ee6d24e8[m
+Author: rockgod100 <jon@ancillaryfactory.com>
+Date:   Thu Jun 9 09:03:52 2011 -0500
+
+    Datepicker jquery only loads on plugin page
+
+[33mcommit ce8f09ecb9a91e44f74e4be55d0dafab5e659f9a[m
+Author: rockgod100 <jon@ancillaryfactory.com>
+Date:   Sat Jun 4 21:36:21 2011 -0500
+
+    all fi

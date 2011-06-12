@@ -13,7 +13,7 @@ function topics_frontend_table() {
 
 		$countClosed = $wpdb->get_results( "SELECT COUNT(ID) as countClosed FROM $table_name WHERE status = 'closed'",ARRAY_A ); 
 
-		
+		$status = $_GET['status'];
 		if (isset($_GET['status'])) {
 		
 	if ($status=='open') {
@@ -32,7 +32,7 @@ function topics_frontend_table() {
 	?>	
 		
 		<div id="statusTableForm">
-			<strong>Show Topics:</strong> <a href="admin.php?page=topics&status=all">All</a> (<?php print $countAll[0]['countAll'] ?>) | <a href="admin.php?page=topics&status=open">Open</a> (<?php print $countOpen[0]['countOpen'] ?>) | <a href="admin.php?page=topics&status=closed">Closed</a> (<?php print $countClosed[0]['countClosed'] ?>)
+			<strong>Show Topics:</strong> <a href="<?php the_permalink()?>?status=all">All</a> (<?php print $countAll[0]['countAll'] ?>) | <a href="<?php the_permalink()?>?status=open">Open</a> (<?php print $countOpen[0]['countOpen'] ?>) | <a href="<?php the_permalink()?>?status=closed">Closed</a> (<?php print $countClosed[0]['countClosed'] ?>)
 
 
 			<!-- <div id="optionMenu">
@@ -40,7 +40,10 @@ function topics_frontend_table() {
 				<a href="#" id="sendMessageLink">Send a message to an author</a>
 			</div> -->
 		</div>
-	
+		
+		<!-- <pre><?php // print_r($_GET); ?></pre> -->
+		
+		
 		<!-- Main Table starts here -->
 	<table cellpadding="15" id="topicTable" style="width:100%">
 		<thead>
@@ -55,20 +58,22 @@ function topics_frontend_table() {
 	
 		<tbody>
 		
-	<?php foreach ($results as $row) { 	
+	<?php
+	
+	foreach ($results as $row) { 	
 		$authorID = $row->author;
 		$id = $row->id;
 		// converts userID from dropdown to user_nicename
 		$authorName = $wpdb->get_results( "SELECT user_nicename FROM wp_users, $table_name WHERE wp_users.ID = author AND $table_name.id = '$authorID'", ARRAY_A );
 
 		?>
-		<!-- <pre><?php// print_r($_GET); ?></pre> -->
+		
 	
 		<tr>
 		<form method="post" action="admin.php?page=topics" id="topicForm<?php print $id; ?>">
 		<input type="hidden" name="id" value="<?php print $id; ?>" />
 			<td style="padding:5px">
-				<a href="admin.php?page=topics&topic=<?php print $id; ?>"><?php print stripslashes($row->topic); ?></a>
+				<?php print stripslashes($row->topic); ?>
 			</td>
 			<td style="padding:5px"><?php print $row->format; ?></td>
 			<td style="padding:5px"><?php print $row->date; ?></td>
