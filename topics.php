@@ -4,7 +4,7 @@
 
 Plugin Name: Topic Manager
 Description: Manages topic assignments for multiple authors
-Version: 1.45
+Version: 1.50
 Author: AOA
 Author URI: http://www.aoa.org
 License: GPL2
@@ -79,6 +79,9 @@ function topic_activate() {
 	}
 }
 
+if ( !is_admin() ) {
+	include 'frontend-template.php';
+}
 
 
 //////////////////////////////// Admin Settings///////////////////////////////////////////////////////
@@ -107,11 +110,11 @@ function topics_admin() {
 global $wpdb;
 $table_name = $wpdb->prefix . "topic_manager"; 
 
-$countAll = $wpdb->get_results( "SELECT COUNT(*) as countAll FROM $table_name",ARRAY_A );
+$countAll = $wpdb->get_results( "SELECT COUNT(id) as countAll FROM $table_name",ARRAY_A );
 
-$countOpen = $wpdb->get_results( "SELECT COUNT(*) as countOpen FROM $table_name WHERE status = 'open' OR status = 'in progress'",ARRAY_A );
+$countOpen = $wpdb->get_results( "SELECT COUNT(id) as countOpen FROM $table_name WHERE status = 'open' OR status = 'in progress'",ARRAY_A );
 
-$countClosed = $wpdb->get_results( "SELECT COUNT(*) as countClosed FROM $table_name WHERE status = 'closed'",ARRAY_A );
+$countClosed = $wpdb->get_results( "SELECT COUNT(id) as countClosed FROM $table_name WHERE status = 'closed'",ARRAY_A );
 
  ?> 
  
