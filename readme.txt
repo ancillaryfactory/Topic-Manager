@@ -30,7 +30,9 @@ Admins can also e-mail authors directly through the interface using an extension
 
 
 == Screenshots ==
-screenshot-1.gif
+1. Available topics
+2. Create a new topic
+3. Email a registered user
 
 
 
