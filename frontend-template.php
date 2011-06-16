@@ -95,6 +95,7 @@ function topics_frontend_table() {
 	
 	} else {  // if user is not logged in  ?>
 		<p><a href="<?php echo wp_login_url( get_permalink() ); ?>" title="Login">Login</a> to see the list of available topics.</p>
+
 	<?php }
 
 }
