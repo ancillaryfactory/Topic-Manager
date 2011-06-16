@@ -1,0 +1,37 @@
+=== Topic Manger ===
+
+Contributors: Jon Schwab
+Plugin Name: Topic Manager
+Plugin URI: https://github.com/ancillaryfactory/Topic-Manager
+Tags: wp, multi-author, topics, posts, authors
+Author URI: http://www.aoa.org
+Author: AOA
+Requires at least: 3.0
+Tested up to: 3.1.3
+Stable tag: 1.5
+Version: 1.5
+
+A quick way to manage post topics for multi-author blogs
+
+== Installation ==
+
+1. Upload Topic Manager folder to the `/wp-content/plugins/` directory
+1. Activate the plugin through the 'Plugins' menu in WordPress
+1. A 'Topic Manager' option will now be available in the left column of the dashboard.
+1. To give authors a front-end table of open and assigned topics, place `<?php topics_frontend_table(); ?>` in a custom page template, most likely a copy of page.php
+
+
+
+== Description ==
+This plugin allows site admins to assign post topics to content authors. Additionally, authors can be given 
+due dates and suggested post types (article, video, etc). 
+
+Admins can also e-mail authors directly through the interface using an extension of the wp_mail() function.
+
+
+== Screenshots ==
+screenshot-1.gif
+
+
+
+== Changelog ==
