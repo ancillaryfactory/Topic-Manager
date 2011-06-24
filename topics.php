@@ -3,8 +3,8 @@
 /*
 
 Plugin Name: Topic Manager
-Description: Manages topic assignments for multiple authors
-Version: 1.51
+Description: Remember and manage post topics for single or multiple authors
+Version: 1.5.2
 Author: AOA
 Author URI: http://www.aoa.org
 License: GPL2
@@ -391,17 +391,16 @@ function sendAuthorMessage() {
 	$user = $_POST['user'];
 	$subject = $_POST['subject'];
 	
-	global $wpdb;
-	$email = $wpdb->get_results( "SELECT user_email FROM wp_users WHERE ID = '$user' ", ARRAY_A );
-	
-	// convert userID to email here
+	// get user's email from id
+	$userInfo = get_userdata( $user );
+	$email = $userInfo->user_email;
 	
 	$headers= "MIME-Version: 1.0\n" .
         "From: <OptometryStudents.com>" . $fromAddress . "\n" .
         "Content-Type: text/html; charset=\"" .
 		get_option('blog_charset') . "\"\n";
   
-		wp_mail($email[0]['user_email'], $subject, $message, $headers);
+		wp_mail($email, $subject, $message, $headers);
 }
 
 ////////////////////// END SEND AUTHOR MESSAGE ///////////////////////////////////////
