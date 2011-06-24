@@ -4,7 +4,7 @@
 
 Plugin Name: Topic Manager
 Description: Manages topic assignments for multiple authors
-Version: 1.51
+Version: 1.5.1
 Author: AOA
 Author URI: http://www.aoa.org
 License: GPL2
@@ -32,6 +32,10 @@ To do:
 - function to edit authors from table
 
 - add uninstall function
+
+- create front-end page for logged in users
+
+	- redirect to template file
 
 -find way to show description (notes)
 
@@ -456,7 +460,7 @@ add_action('admin_menu', 'topics_admin_actions');
 
 register_activation_hook( __FILE__, 'topic_activate' );
 
-/*
+
 // Create the function to output the contents of our Dashboard Widget
 
 function topic_manager_dashboard_widget_function() {
@@ -473,5 +477,3 @@ function topic_manager_add_dashboard_widgets() {
 // Hook into the 'wp_dashboard_setup' action to register our other functions
 
 add_action('wp_dashboard_setup', 'topic_manager_add_dashboard_widgets' );
-
-*/

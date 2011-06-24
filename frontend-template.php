@@ -1,8 +1,10 @@
 <?php
 
 function topics_frontend_table() {
-	if ( is_user_logged_in() ) {
-		
+	if ( is_user_logged_in() ) { 
+	
+		add_action('wp_footer', 'topics_table_toggle');
+	
 		// table function goes here
 		global $wpdb;
 		$table_name = $wpdb->prefix . "topic_manager"; 
@@ -69,7 +71,7 @@ function topics_frontend_table() {
 		?>
 		
 	
-		<tr>
+		<tr class="topicRow">
 		<form method="post" action="admin.php?page=topics" id="topicForm<?php print $id; ?>">
 		<input type="hidden" name="id" value="<?php print $id; ?>" />
 			<td style="padding:5px">
@@ -81,6 +83,9 @@ function topics_frontend_table() {
 			<td style="padding:5px" id="authorName"><?php print $row->author; ?></td>
 
 		</form>
+		</tr>
+		<tr class="topicChildRow">
+			<td colspan="5"><?php print $row->description; ?></td>
 		</tr>
 		<?php } ?>
 		</tbody>
@@ -98,4 +103,20 @@ function topics_frontend_table() {
 
 	<?php }
 
-}
+} // end frontend table function
+
+
+function topics_table_toggle() { ?>
+
+		<script type="text/javascript">
+			jQuery(document).ready(function() {
+				jQuery(".topicChildRow").hide();
+				jQuery("tr.topicRow").click(function() {
+					$(this).next("tr").toggle();
+				});	
+				jQuery(".topicChildRow").click(function() {$(this).hide();});
+			
+			});
+		</script>
+
+<?php }
