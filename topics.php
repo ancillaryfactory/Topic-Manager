@@ -417,26 +417,32 @@ if (isset($_POST['deleteSubmit'])) {
 
 
 function topics_admin_actions() {  
-	$page = add_menu_page( "Topic Manager", "Topic Manager", "edit_posts", "topics", "topics_admin", "", 30 ); 
-	add_action( "admin_print_scripts", 'topics_admin_js' );
-	add_action( "admin_print_styles-$page", 'topics_admin_register_head' );
 	
+	if (current_user_can( 'manage_options' )) { 
+		$page = add_menu_page( "Topic Manager", "Topic Manager", "edit_posts", "topics", "topics_admin", "", 30 ); 
+		add_action( "admin_print_scripts", 'topics_admin_js' );
+		add_action( "admin_print_styles-$page", 'topics_admin_register_head' );
+	}
 }  
 
 function topics_admin_register_head() {
-	$pluginfolder = get_bloginfo('url') . '/' . PLUGINDIR . '/' . dirname(plugin_basename(__FILE__));
-	wp_enqueue_style('jquery.ui.theme', $pluginfolder . '/smoothness/jquery-ui-1.8.12.custom.css');
-	wp_enqueue_style('topicStyle', $pluginfolder . '/topics.css');
 	
+	if (current_user_can( 'manage_options' )) { 
+		$pluginfolder = get_bloginfo('url') . '/' . PLUGINDIR . '/' . dirname(plugin_basename(__FILE__));
+		wp_enqueue_style('jquery.ui.theme', $pluginfolder . '/smoothness/jquery-ui-1.8.12.custom.css');
+		wp_enqueue_style('topicStyle', $pluginfolder . '/topics.css');
+	}
 }
 
 
 // adds jQuery UI datepicker
 function topics_admin_js() {
-	$pluginfolder = get_bloginfo('url') . '/' . PLUGINDIR . '/' . dirname(plugin_basename(__FILE__));
-	wp_enqueue_script('jquery-ui-datepicker', $pluginfolder . '/jquery.ui.datepicker.min.js', array('jquery', 'jquery-ui-core'), 1, true );
-	wp_enqueue_script('topics-js', $pluginfolder . '/topics.js', 'jquery', 1.0, true );
 	
+	if (current_user_can( 'manage_options' )) { 
+		$pluginfolder = get_bloginfo('url') . '/' . PLUGINDIR . '/' . dirname(plugin_basename(__FILE__));
+		wp_enqueue_script('jquery-ui-datepicker', $pluginfolder . '/jquery.ui.datepicker.min.js', array('jquery', 'jquery-ui-core'), 1, true );
+		wp_enqueue_script('topics-js', $pluginfolder . '/topics.js', 'jquery', 1.0, true );
+	}
 }
 
 
