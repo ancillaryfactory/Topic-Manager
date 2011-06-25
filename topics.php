@@ -3,13 +3,8 @@
 /*
 
 Plugin Name: Topic Manager
-<<<<<<< HEAD
 Description: Remember and manage post topics for single or multiple authors
-Version: 1.5.2
-=======
-Description: Manages topic assignments for multiple authors
-Version: 1.5.1
->>>>>>> tabletoggle
+Version: 1.6
 Author: AOA
 Author URI: http://www.aoa.org
 License: GPL2
@@ -30,22 +25,7 @@ Copyright 2011  AOA  (email : jsschwab@aoa.org)
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-
-To do:
-
-
-- function to edit authors from table
-
-- add uninstall function
-
-- create front-end page for logged in users
-
-	- redirect to template file
-
--find way to show description (notes)
-
 */
-
 
 // Add settings link on plugin page
 
