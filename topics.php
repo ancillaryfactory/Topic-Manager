@@ -455,6 +455,24 @@ add_action('admin_menu', 'topics_admin_actions');
 
 register_activation_hook( __FILE__, 'topic_activate' );
 
+
+/////////////////////// ADD LINK TO ADMIN BAR ////////////////////////////
+
+add_action("admin_bar_menu", "topics_customize_menu");
+
+function topics_customize_menu(){
+    global $wp_admin_bar;
+
+    $wp_admin_bar->add_menu(array(
+		"id" => "topic_menu",
+		"title" => "Topic Manager",
+		"href" => admin_url("admin.php?page=topics")
+	));
+}
+//////////////////////// END ADMIN BAR /////////////////////////////////////
+
+
+
 /*
 // Create the function to output the contents of our Dashboard Widget
 
