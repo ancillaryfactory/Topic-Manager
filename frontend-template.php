@@ -65,17 +65,24 @@ function topics_frontend_table() {
 	foreach ($results as $row) { 	
 		$authorID = $row->author;
 		$id = $row->id;
-		// converts userID from dropdown to user_nicename
-		$authorName = $wpdb->get_results( "SELECT user_nicename FROM wp_users, $table_name WHERE wp_users.ID = author AND $table_name.id = '$authorID'", ARRAY_A );
+		
+		// Currently, the author field is open, so the author isn't chosen from a dropdown.
+		// $authorName = $wpdb->get_results( "SELECT user_nicename FROM wp_users, $table_name WHERE wp_users.ID = author AND $table_name.id = '$authorID'", ARRAY_A );
 
 		?>
 		
-	
-		<tr class="topicRow" style="cursor:pointer">
-		<form method="post" action="admin.php?page=topics" id="topicForm<?php print $id; ?>">
+		<tr class="topicRow <?php if ($row->description) { print 'hasDescription'; } ?>" >
+		
+		<form method="post" action="<?php echo get_admin_url() . 'admin.php?page=topics'; ?>" id="topicForm<?php print $id; ?>">
 		<input type="hidden" name="id" value="<?php print $id; ?>" />
 			<td style="padding:5px">
-				<a href="#"><?php print stripslashes($row->topic); ?></a>
+				<?php
+				if ($row->description) { ?>
+					<a href="#"><?php print stripslashes($row->topic); ?></a> 
+				<?php } else { 
+					print stripslashes($row->topic); 
+				}
+				?>
 			</td>
 			<td style="padding:5px"><?php print $row->format; ?></td>
 			<td style="padding:5px"><?php print $row->date; ?></td>
@@ -84,7 +91,7 @@ function topics_frontend_table() {
 
 		</form>
 		</tr>
-		<tr class="topicChildRow" style="background:#d6d6d6">
+		<tr class="topicChildRow" style="background:#f2f2f2;cursor:pointer">
 			<td colspan="5">
 				<?php 
 				if ($row->description) {
@@ -120,14 +127,16 @@ function topics_table_toggle() { ?>
 			jQuery(document).ready(function() {
 				jQuery('.topicChildRow').hide();
 				jQuery('tr.topicRow').hover(function() {
-					jQuery(this).css('background','#d6d6d6');
+					jQuery(this).css('background','#f2f2f2');
 				},
 				function() {
 					jQuery(this).css('background','inherit');
-				}
-				);
+				});
 				
-				jQuery('tr.topicRow').click(function() {
+				// only adds pointer to rows with a description
+				jQuery('tr.hasDescription').css('cursor','pointer');
+				
+				jQuery('tr.hasDescription').click(function() {
 					jQuery(this).next('tr').toggle();
 					return false;
 				}); 	
