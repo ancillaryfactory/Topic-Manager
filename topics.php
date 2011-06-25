@@ -465,7 +465,7 @@ add_action('admin_menu', 'topics_admin_actions');
 register_activation_hook( __FILE__, 'topic_activate' );
 
 
-<<<<<<< HEAD
+
 /////////////////////// ADD LINK TO ADMIN BAR ////////////////////////////
 
 add_action("admin_bar_menu", "topics_customize_menu",999);
@@ -484,8 +484,7 @@ function topics_customize_menu(){
 
 
 /*
-=======
->>>>>>> tabletoggle
+
 // Create the function to output the contents of our Dashboard Widget
 
 function topic_manager_dashboard_widget_function() {

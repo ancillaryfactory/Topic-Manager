@@ -2,14 +2,14 @@
 
 Contributors: rockgod100
 Plugin Name: Topic Manager
-Plugin URI: https://github.com/ancillaryfactory/Topic-Manager
+Plugin URI: http://www.ancillaryfactory/topicmanager
 Tags: wp, multi-author, topics, posts, authors
 Author URI: http://www.aoa.org
 Author: AOA
 Requires at least: 3.0
-Tested up to: 3.1.3
-Stable tag: 1.5.2
-Version: 1.5.2
+Tested up to: 3.2
+Stable tag: 1.6
+Version: 1.6
 
 A quick way to manage post topics for multi-author blogs
 
@@ -36,3 +36,5 @@ Admins can also e-mail authors directly through the interface using an extension
 
 
 == Changelog ==
+
+Version 1.6: Added link in Admin bar and display of descriptions in frontend table
