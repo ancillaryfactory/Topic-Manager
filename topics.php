@@ -458,7 +458,7 @@ register_activation_hook( __FILE__, 'topic_activate' );
 
 /////////////////////// ADD LINK TO ADMIN BAR ////////////////////////////
 
-add_action("admin_bar_menu", "topics_customize_menu");
+add_action("admin_bar_menu", "topics_customize_menu",999);
 
 function topics_customize_menu(){
     global $wp_admin_bar;
