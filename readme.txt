@@ -36,5 +36,6 @@ Admins can also e-mail authors directly through the interface using an extension
 
 
 == Changelog ==
-
-Version 1.6: Added link in Admin bar and display of descriptions in frontend table
+Version 1.6: 
+* Recommended security update: Admin functionality is now only available to users who can manage options (admins)
+* Added link in Admin bar and display of descriptions in frontend table
