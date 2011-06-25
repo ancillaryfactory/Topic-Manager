@@ -448,16 +448,21 @@ register_activation_hook( __FILE__, 'topic_activate' );
 
 /////////////////////// ADD LINK TO ADMIN BAR ////////////////////////////
 
+
 add_action("admin_bar_menu", "topics_customize_menu",999);
 
-function topics_customize_menu(){
-    global $wp_admin_bar;
 
-    $wp_admin_bar->add_menu(array(
-		"id" => "topic_menu",
-		"title" => "Topic Manager",
-		"href" => admin_url("admin.php?page=topics")
-	));
+function topics_customize_menu(){
+	// only add menu link for admins
+	if (current_user_can( 'manage_options' )) { 
+		
+		global $wp_admin_bar;
+		$wp_admin_bar->add_menu(array(
+			"id" => "topic_menu",
+			"title" => "Topic Manager",
+			"href" => admin_url("admin.php?page=topics")
+		));
+	}
 }
 //////////////////////// END ADMIN BAR /////////////////////////////////////
 
