@@ -47,7 +47,7 @@ function topics_frontend_table() {
 		
 		
 		<!-- Main Table starts here -->
-	<table cellpadding="15" id="topicTable" style="width:100%">
+	<table cellpadding="15" id="topicTable" style="width:100%;font-size:0.8em;">
 		<thead>
 		<tr id="topicTableHeader">
 			<th><strong>Topic</strong></th>
@@ -71,11 +71,11 @@ function topics_frontend_table() {
 		?>
 		
 	
-		<tr class="topicRow">
+		<tr class="topicRow" style="cursor:pointer">
 		<form method="post" action="admin.php?page=topics" id="topicForm<?php print $id; ?>">
 		<input type="hidden" name="id" value="<?php print $id; ?>" />
 			<td style="padding:5px">
-				<?php print stripslashes($row->topic); ?>
+				<a href="#"><?php print stripslashes($row->topic); ?></a>
 			</td>
 			<td style="padding:5px"><?php print $row->format; ?></td>
 			<td style="padding:5px"><?php print $row->date; ?></td>
@@ -84,8 +84,16 @@ function topics_frontend_table() {
 
 		</form>
 		</tr>
-		<tr class="topicChildRow">
-			<td colspan="5"><?php print $row->description; ?></td>
+		<tr class="topicChildRow" style="background:#d6d6d6">
+			<td colspan="5">
+				<?php 
+				if ($row->description) {
+					print stripslashes($row->description);
+				} else {
+					print '<span style="color:#999"><em>No description</em></span>';
+				}
+				?>
+			</td>
 		</tr>
 		<?php } ?>
 		</tbody>
@@ -111,8 +119,17 @@ function topics_table_toggle() { ?>
 		<script type="text/javascript">
 			jQuery(document).ready(function() {
 				jQuery('.topicChildRow').hide();
+				jQuery('tr.topicRow').hover(function() {
+					jQuery(this).css('background','#d6d6d6');
+				},
+				function() {
+					jQuery(this).css('background','inherit');
+				}
+				);
+				
 				jQuery('tr.topicRow').click(function() {
 					jQuery(this).next('tr').toggle();
+					return false;
 				}); 	
 				jQuery('.topicChildRow').click(function() {jQuery(this).hide();});
 			
