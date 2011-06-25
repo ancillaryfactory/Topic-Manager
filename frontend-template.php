@@ -110,11 +110,11 @@ function topics_table_toggle() { ?>
 
 		<script type="text/javascript">
 			jQuery(document).ready(function() {
-				jQuery(".topicChildRow").hide();
-				jQuery("tr.topicRow").click(function() {
-					$(this).next("tr").toggle();
-				});	
-				jQuery(".topicChildRow").click(function() {$(this).hide();});
+				jQuery('.topicChildRow').hide();
+				jQuery('tr.topicRow').click(function() {
+					jQuery(this).next('tr').toggle();
+				}); 	
+				jQuery('.topicChildRow').click(function() {jQuery(this).hide();});
 			
 			});
 		</script>
