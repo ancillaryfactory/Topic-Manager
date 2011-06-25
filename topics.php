@@ -481,12 +481,8 @@ function topics_customize_menu(){
 }
 //////////////////////// END ADMIN BAR /////////////////////////////////////
 
-
-
-/*
-
 // Create the function to output the contents of our Dashboard Widget
-
+/*
 function topic_manager_dashboard_widget_function() {
 	// Display whatever it is you want to show
 	echo "Table of open topics";
@@ -500,4 +496,4 @@ function topic_manager_add_dashboard_widgets() {
 
 // Hook into the 'wp_dashboard_setup' action to register our other functions
 
-add_action('wp_dashboard_setup', 'topic_manager_add_dashboard_widgets' );
+add_action('wp_dashboard_setup', 'topic_manager_add_dashboard_widgets' ); */
