@@ -3,14 +3,15 @@
 /*
 
 Plugin Name: Topic Manager
+Plugin URI: http://www.ancillaryfactory.com/topicmanager
 Description: Remember and manage post topics for single or multiple authors
 Version: 1.6
-Author: AOA
-Author URI: http://www.aoa.org
+Author: rockgod100
+Author URI: http://www.ancillaryfactory.com
 License: GPL2
 
 
-Copyright 2011  AOA  (email : jsschwab@aoa.org)
+Copyright 2011    (email : jsschwab@aoa.org)
 
     This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License, version 2, as 
