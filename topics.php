@@ -423,6 +423,7 @@ function topics_admin_actions() {
 		$page = add_menu_page( "Topic Manager", "Topic Manager", "edit_posts", "topics", "topics_admin", "", 30 ); 
 		add_action( "admin_print_scripts", 'topics_admin_js' );
 		add_action( "admin_print_styles-$page", 'topics_admin_register_head' );
+		add_options_page('Topic Manager Settings', 'Topic Manager', 'manage_options', 'topic-manager-settings', 'topic_manager_options');
 	}
 }  
 
@@ -472,6 +473,24 @@ function topics_customize_menu(){
 	}
 }
 //////////////////////// END ADMIN BAR /////////////////////////////////////
+
+
+
+//////////////////////// SETTINGS PAGE /////////////////////////////////////
+
+function topic_manager_options() {
+	if (!current_user_can('manage_options'))  {
+		wp_die( __('You do not have sufficient permissions to access this page.') );
+	} ?>
+	<div class="wrap">
+	<p>Here is where the form would go if I actually had options.</p>
+	</div>
+<?php }
+
+
+//////////////////////// END SETTINGS PAGE /////////////////////////////////////
+
+
 
 // Create the function to output the contents of our Dashboard Widget
 /*
