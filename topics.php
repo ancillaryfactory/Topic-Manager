@@ -66,9 +66,12 @@ function topic_activate() {
 }
 
 if ( !is_admin() ) {
-	include 'frontend-template.php';
+	include_once 'frontend-template.php';
 }
 
+if ( is_admin() ) {
+	include_once 'includes/topics-options.php';
+}
 
 //////////////////////////////// Admin Settings///////////////////////////////////////////////////////
 
@@ -481,7 +484,7 @@ function topics_customize_menu(){
 function topic_manager_options() {
 	if (!current_user_can('manage_options'))  {
 		wp_die( __('You do not have sufficient permissions to access this page.') );
-	} ?>
+	} ?>	
 	<div class="wrap">
 	<p>Here is where the form would go if I actually had options.</p>
 	</div>
