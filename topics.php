@@ -479,19 +479,6 @@ function topics_customize_menu(){
 
 
 
-//////////////////////// SETTINGS PAGE /////////////////////////////////////
-
-function topic_manager_options() {
-	if (!current_user_can('manage_options'))  {
-		wp_die( __('You do not have sufficient permissions to access this page.') );
-	} ?>	
-	<div class="wrap">
-	<p>Here is where the form would go if I actually had options.</p>
-	</div>
-<?php }
-
-
-//////////////////////// END SETTINGS PAGE /////////////////////////////////////
 
 
 
