@@ -61,6 +61,10 @@ function topic_activate() {
 			dbDelta($sql);
  
 		$insertedTopic = $wpdb->insert( $table_name, array( 'topic' => 'My first topic', 'description' => 'Here is the description', 'status' => 'open'), array( '%s', '%s' ) );
+		
+		// set default options
+		update_option('topicsShowInAdminBar', 'yes');
+		update_option('topicManagerPermission', 'admin');
 	
 	}
 }
@@ -72,6 +76,20 @@ if ( !is_admin() ) {
 if ( is_admin() ) {
 	include_once 'includes/topics-options.php';
 }
+
+function topicManagerCheckPermission() {
+	$topicManagerPermission = get_option('topicManagerPermission');
+	
+	if ( $topicManagerPermission == 'admin' ) {
+		$topicsPermissionLevel = 'manage_options';
+	} elseif ( $topicManagerPermission == 'author' ) {
+		$topicsPermissionLevel = 'upload_files';
+	}
+	
+	return $topicsPermissionLevel;
+	
+} // end checkPermission()
+
 
 //////////////////////////////// Admin Settings///////////////////////////////////////////////////////
 
@@ -421,8 +439,8 @@ if (isset($_POST['deleteSubmit'])) {
 
 
 function topics_admin_actions() {  
-	
-	if (current_user_can( 'manage_options' )) { 
+	$topics_permission = topicManagerCheckPermission();
+	if (current_user_can( $topics_permission  )) { 
 		$page = add_menu_page( "Topic Manager", "Topic Manager", "edit_posts", "topics", "topics_admin", "", 30 ); 
 		add_action( "admin_print_scripts", 'topics_admin_js' );
 		add_action( "admin_print_styles-$page", 'topics_admin_register_head' );
@@ -431,8 +449,8 @@ function topics_admin_actions() {
 }  
 
 function topics_admin_register_head() {
-	
-	if (current_user_can( 'manage_options' )) { 
+	$topics_permission = topicManagerCheckPermission();
+	if (current_user_can( $topics_permission )) { 
 		$pluginfolder = get_bloginfo('url') . '/' . PLUGINDIR . '/' . dirname(plugin_basename(__FILE__));
 		wp_enqueue_style('jquery.ui.theme', $pluginfolder . '/smoothness/jquery-ui-1.8.12.custom.css');
 		wp_enqueue_style('topicStyle', $pluginfolder . '/topics.css');
@@ -442,8 +460,8 @@ function topics_admin_register_head() {
 
 // adds jQuery UI datepicker
 function topics_admin_js() {
-	
-	if (current_user_can( 'manage_options' )) { 
+	$topics_permission = topicManagerCheckPermission();
+	if (current_user_can( $topics_permission )) { 
 		$pluginfolder = get_bloginfo('url') . '/' . PLUGINDIR . '/' . dirname(plugin_basename(__FILE__));
 		wp_enqueue_script('jquery-ui-datepicker', $pluginfolder . '/jquery.ui.datepicker.min.js', array('jquery', 'jquery-ui-core'), 1, true );
 		wp_enqueue_script('topics-js', $pluginfolder . '/topics.js', 'jquery', 1.0, true );

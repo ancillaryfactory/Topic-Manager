@@ -39,13 +39,13 @@ function topic_manager_options() {
 		<h3>Permission to use Topic Manager administrator functions</h3>
 	
 		 <label>
-    <input type="radio" name="topicManagerPermission" value="publish_posts" id="status_0"
-	<?php if ($topicManagerPermission=='upload_files') {?> checked <?php } ?> />
+    <input type="radio" name="topicManagerPermission" value="author" id="status_0"
+	<?php if ($topicManagerPermission=='author') {?> checked <?php } ?> />
     Authors and Administrators</label>
   <br>
   <label>
-    <input type="radio" name="topicManagerPermission" value="manage_options" id="status_1"
-	<?php if ($topicManagerPermission=='manage_options') {?> checked <?php } ?> />
+    <input type="radio" name="topicManagerPermission" value="admin" id="status_1"
+	<?php if ($topicManagerPermission=='admin') {?> checked <?php } ?> />
     Administrators only</label>
 		
 		<p class="submit">  
