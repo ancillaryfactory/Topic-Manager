@@ -135,7 +135,8 @@ $countClosed = $wpdb->get_results( "SELECT COUNT(id) as countClosed FROM $table_
 
 <div id="optionMenu">
 	<a href="#" id="addNewLink">Add new topic</a>&nbsp;|
-	<a href="#" id="sendMessageLink">Send a message to an author</a>
+	<a href="#" id="sendMessageLink">Send a message to an author</a>&nbsp;|
+	<a href="<?php echo admin_url("options-general.php?page=topic-manager-settings"); ?>">Settings</a>
 	</div>
 </div>
 
