@@ -5,7 +5,7 @@
 Plugin Name: Topic Manager
 Plugin URI: http://www.ancillaryfactory.com/topicmanager
 Description: Remember and manage post topics for single or multiple authors
-Version: 1.6
+Version: 1.7
 Author: rockgod100
 Author URI: http://www.ancillaryfactory.com
 License: GPL2
@@ -42,6 +42,14 @@ $plugin = plugin_basename(__FILE__);
 
 
 function topic_activate() {
+	
+	// check for existing options and add if not already set
+	$checkPermission = get_option('topicManagerPermission');
+	if (($checkPermission != 'admin') and ($checkPermission != 'author')) {
+		update_option('topicsShowInAdminBar', 'yes');
+		update_option('topicManagerPermission', 'admin');
+	}
+	
 	global $wpdb;
 	$table_name = $wpdb->prefix . "topic_manager";
 	if($wpdb->get_var("show tables like '$table_name'") != $table_name)
