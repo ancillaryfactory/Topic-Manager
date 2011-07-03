@@ -8,10 +8,10 @@ Author URI: http://www.aoa.org
 Author: AOA
 Requires at least: 3.0
 Tested up to: 3.2
-Stable tag: 1.6
-Version: 1.6
+Stable tag: 1.7
+Version: 1.7
 
-A quick way to manage post topics for multi-author blogs
+A quick way to remember post topics for single or multi-author blogs
 
 == Installation ==
 
@@ -36,6 +36,8 @@ Admins can also e-mail authors directly through the interface using an extension
 
 
 == Changelog ==
-Version 1.6: 
-* Recommended security update: Admin functionality is now only available to users who can manage options (admins)
-* Added link in Admin bar and display of descriptions in frontend table
+Version 1.7: 
+
+* New options screen
+* Link to Topic Manager now appears in Admin bar
+* Choose permission level for access to Topic Manager admin functions

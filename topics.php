@@ -70,7 +70,7 @@ function topic_activate() {
 }
 
 if ( !is_admin() ) {
-	include_once 'frontend-template.php';
+	include_once 'includes/frontend-template.php';
 }
 
 if ( is_admin() ) {
