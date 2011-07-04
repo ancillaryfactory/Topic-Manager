@@ -44,12 +44,15 @@ $plugin = plugin_basename(__FILE__);
 function topic_activate() {
 	
 	// check for existing options and add if not already set
+	// if an old (pre 1.6) version of the plugin is already installed
 	$checkPermission = get_option('topicManagerPermission');
 	if (($checkPermission != 'admin') and ($checkPermission != 'author')) {
 		update_option('topicsShowInAdminBar', 'yes');
 		update_option('topicManagerPermission', 'admin');
+		update_option('topicManagerAuthorMode', 'single');
 	}
 	
+	// first time plugin activation
 	global $wpdb;
 	$table_name = $wpdb->prefix . "topic_manager";
 	if($wpdb->get_var("show tables like '$table_name'") != $table_name)
@@ -73,6 +76,7 @@ function topic_activate() {
 		// set default options
 		update_option('topicsShowInAdminBar', 'yes');
 		update_option('topicManagerPermission', 'admin');
+		update_option('topicManagerAuthorMode', 'single');
 	
 	}
 }
@@ -122,6 +126,8 @@ function topics_admin() {
 
 <?php
 
+$topicManagerAuthorMode = get_option('topicManagerAuthorMode'); 
+
 global $wpdb;
 $table_name = $wpdb->prefix . "topic_manager"; 
 
@@ -143,7 +149,10 @@ $countClosed = $wpdb->get_results( "SELECT COUNT(id) as countClosed FROM $table_
 
 <div id="optionMenu">
 	<a href="#" id="addNewLink">Add new topic</a>&nbsp;|
-	<a href="#" id="sendMessageLink">Send a message to an author</a>&nbsp;|
+	
+	<?php if ($topicManagerAuthorMode == 'multi') { ?>
+		<a href="#" id="sendMessageLink">Send a message to an author</a>&nbsp;|
+	<?php } ?>
 	<a href="<?php echo admin_url("options-general.php?page=topic-manager-settings"); ?>">Settings</a>
 	</div>
 </div>
@@ -191,8 +200,10 @@ if (isset($_GET['status'])) {
 		<p><label>Date to Publish:</label><br/>
 		<input type="text" name="date" class="datePicker" style="width:200px"/></p>
 		
-		<p><label>Assigned Author(s):</label><br/>
-		<input type="text" name="author" style="width:200px"/></p>
+		<?php if ($topicManagerAuthorMode == 'multi') { ?>
+			<p><label>Assigned Author(s):</label><br/>
+			<input type="text" name="author" style="width:200px"/></p>
+		<?php } ?>
 		
 		<input type="submit" name="addTopic" value="Add topic" />&nbsp;&nbsp;<a href="#" id="cancelAdd">Cancel</a>
 		
@@ -201,6 +212,8 @@ if (isset($_GET['status'])) {
 	
 	
 	<!-- Send Message Form -->
+	
+<?php if ($topicManagerAuthorMode == 'multi') { ?>
 	<div id="sendMessageForm">
 	<h3>Send Message</h3>
 	<form id="sendMessage" method="post" action="admin.php?page=topics">
@@ -218,7 +231,7 @@ if (isset($_GET['status'])) {
 		
 	</form>
 	</div> <!-- end sendMessageForm -->
-	
+<?php } ?>
 	
 	<!-- End Send Message Form -->
 	
