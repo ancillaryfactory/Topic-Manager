@@ -5,7 +5,7 @@
 Plugin Name: Topic Manager
 Plugin URI: http://www.ancillaryfactory.com/topicmanager
 Description: Remember and manage post topics for single or multiple authors
-Version: 1.7
+Version: 1.7.1
 Author: rockgod100
 Author URI: http://www.ancillaryfactory.com
 License: GPL2

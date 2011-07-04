@@ -8,8 +8,8 @@ Author URI: http://www.aoa.org
 Author: AOA
 Requires at least: 3.0
 Tested up to: 3.2
-Stable tag: 1.7
-Version: 1.7
+Stable tag: 1.7.1
+Version: 1.7.1
 
 A quick way to remember post topics for single or multi-author blogs
 
@@ -39,7 +39,7 @@ Admins can also e-mail authors directly through the interface using an extension
 
 
 == Changelog ==
-Version 1.7: 
+Version 1.7.1: 
 
 * New options screen
 * Link to Topic Manager now appears in Admin bar
