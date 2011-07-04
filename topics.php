@@ -244,7 +244,10 @@ if (isset($_GET['status'])) {
 			<th width="150"><strong>Format</strong></th>
 			<th width="100"><strong>Publish Date</strong></th>
 			<th width="100"><strong>Status</strong></th>
-			<th width="200"><strong>Author</strong></th>
+			
+			<?php if ($topicManagerAuthorMode == 'multi') { ?>
+				<th width="200"><strong>Author</strong></th>
+			<?php } ?>
 		</tr>
 		</thead>
 	
@@ -268,8 +271,11 @@ if (isset($_GET['status'])) {
 			<td style="padding:5px"><?php print $row->format; ?></td>
 			<td style="padding:5px"><?php print $row->date; ?></td>
 			<td style="padding:5px"><?php print $row->status; ?></td>
-			<td style="padding:5px" id="authorName"><?php print $row->author; ?></td>
-
+			
+			<?php if ($topicManagerAuthorMode == 'multi') { ?>
+				<td style="padding:5px" id="authorName"><?php print $row->author; ?></td>
+			<?php } ?>
+			
 		</form>
 		</tr>
 		<?php } ?>
