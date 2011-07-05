@@ -328,8 +328,10 @@ if (isset($_GET['topic'])) {
 		<p><label>Date to Publish:</label><br/>
 		<input type="text" name="date" class="datePicker" style="width:200px" value="<?php print stripslashes($editDetails[0]['date']); ?>"/></p>
 		
-		<p><label>Assigned Author(s):</label><br/>
-		<input type="text" name="author" style="width:200px" value="<?php print stripslashes($editDetails[0]['author']); ?>"/></p>
+		<?php if ($topicManagerAuthorMode == 'multi') { ?>
+			<p><label>Assigned Author(s):</label><br/>
+			<input type="text" name="author" style="width:200px" value="<?php print stripslashes($editDetails[0]['author']); ?>"/></p>
+		<?php } ?>
 		
 		<input type="submit" name="editSubmit" value="Update" />&nbsp;
 		<a href="<?php print $adminURL; ?>admin.php?page=topics">Cancel</a>&nbsp;&nbsp;
