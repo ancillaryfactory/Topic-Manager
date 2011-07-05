@@ -514,7 +514,7 @@ add_action("admin_bar_menu", "topics_customize_menu",999);
 function topics_customize_menu(){
 	$topicsShowInAdminBar = get_option('topicsShowInAdminBar'); 
 	// only add menu link for admins
-	if ( current_user_can( 'manage_options' ) && $topicsShowInAdminBar == 'yes') { 
+	if ( $topicsShowInAdminBar == 'yes') { 
 		
 		global $wp_admin_bar;
 		$wp_admin_bar->add_menu(array(
