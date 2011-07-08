@@ -3,6 +3,7 @@
 function topics_frontend_table() {
 	if ( is_user_logged_in() ) { 
 	
+		$topicManagerAuthorMode = get_option('topicManagerAuthorMode'); 
 		add_action('wp_footer', 'topics_table_toggle');
 	
 		// table function goes here
@@ -54,7 +55,9 @@ function topics_frontend_table() {
 			<th><strong>Format</strong></th>
 			<th><strong>Publish Date</strong></th>
 			<th><strong>Status</strong></th>
-			<th><strong>Author</strong></th>
+			<?php if ($topicManagerAuthorMode == 'multi') { ?>
+				<th><strong>Author</strong></th>
+			<?php } ?>
 		</tr>
 		</thead>
 	
@@ -87,8 +90,9 @@ function topics_frontend_table() {
 			<td style="padding:5px"><?php print $row->format; ?></td>
 			<td style="padding:5px"><?php print $row->date; ?></td>
 			<td style="padding:5px"><?php print $row->status; ?></td>
-			<td style="padding:5px" id="authorName"><?php print $row->author; ?></td>
-
+			<?php if ($topicManagerAuthorMode == 'multi') { ?>
+				<td style="padding:5px" id="authorName"><?php print $row->author; ?></td>
+			<?php } ?>
 		</form>
 		</tr>
 		<tr class="topicChildRow" style="background:#f2f2f2;cursor:pointer">
