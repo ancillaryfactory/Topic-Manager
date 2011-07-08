@@ -5,7 +5,7 @@
 Plugin Name: Topic Manager
 Plugin URI: http://www.ancillaryfactory.com/topicmanager
 Description: Remember and manage post topics for single or multiple authors
-Version: 1.7.1
+Version: 1.8
 Author: rockgod100
 Author URI: http://www.ancillaryfactory.com
 License: GPL2
@@ -44,12 +44,15 @@ $plugin = plugin_basename(__FILE__);
 function topic_activate() {
 	
 	// check for existing options and add if not already set
+	// if an old (pre 1.6) version of the plugin is already installed
 	$checkPermission = get_option('topicManagerPermission');
 	if (($checkPermission != 'admin') and ($checkPermission != 'author')) {
 		update_option('topicsShowInAdminBar', 'yes');
 		update_option('topicManagerPermission', 'admin');
+		update_option('topicManagerAuthorMode', 'single');
 	}
 	
+	// first time plugin activation
 	global $wpdb;
 	$table_name = $wpdb->prefix . "topic_manager";
 	if($wpdb->get_var("show tables like '$table_name'") != $table_name)
@@ -73,6 +76,7 @@ function topic_activate() {
 		// set default options
 		update_option('topicsShowInAdminBar', 'yes');
 		update_option('topicManagerPermission', 'admin');
+		update_option('topicManagerAuthorMode', 'single');
 	
 	}
 }
@@ -122,6 +126,8 @@ function topics_admin() {
 
 <?php
 
+$topicManagerAuthorMode = get_option('topicManagerAuthorMode'); 
+
 global $wpdb;
 $table_name = $wpdb->prefix . "topic_manager"; 
 
@@ -143,7 +149,10 @@ $countClosed = $wpdb->get_results( "SELECT COUNT(id) as countClosed FROM $table_
 
 <div id="optionMenu">
 	<a href="#" id="addNewLink">Add new topic</a>&nbsp;|
-	<a href="#" id="sendMessageLink">Send a message to an author</a>&nbsp;|
+	
+	<?php if ($topicManagerAuthorMode == 'multi') { ?>
+		<a href="#" id="sendMessageLink">Send a message to an author</a>&nbsp;|
+	<?php } ?>
 	<a href="<?php echo admin_url("options-general.php?page=topic-manager-settings"); ?>">Settings</a>
 	</div>
 </div>
@@ -191,8 +200,10 @@ if (isset($_GET['status'])) {
 		<p><label>Date to Publish:</label><br/>
 		<input type="text" name="date" class="datePicker" style="width:200px"/></p>
 		
-		<p><label>Assigned Author(s):</label><br/>
-		<input type="text" name="author" style="width:200px"/></p>
+		<?php if ($topicManagerAuthorMode == 'multi') { ?>
+			<p><label>Assigned Author(s):</label><br/>
+			<input type="text" name="author" style="width:200px"/></p>
+		<?php } ?>
 		
 		<input type="submit" name="addTopic" value="Add topic" />&nbsp;&nbsp;<a href="#" id="cancelAdd">Cancel</a>
 		
@@ -201,6 +212,8 @@ if (isset($_GET['status'])) {
 	
 	
 	<!-- Send Message Form -->
+	
+<?php if ($topicManagerAuthorMode == 'multi') { ?>
 	<div id="sendMessageForm">
 	<h3>Send Message</h3>
 	<form id="sendMessage" method="post" action="admin.php?page=topics">
@@ -218,7 +231,7 @@ if (isset($_GET['status'])) {
 		
 	</form>
 	</div> <!-- end sendMessageForm -->
-	
+<?php } ?>
 	
 	<!-- End Send Message Form -->
 	
@@ -231,7 +244,10 @@ if (isset($_GET['status'])) {
 			<th width="150"><strong>Format</strong></th>
 			<th width="100"><strong>Publish Date</strong></th>
 			<th width="100"><strong>Status</strong></th>
-			<th width="200"><strong>Author</strong></th>
+			
+			<?php if ($topicManagerAuthorMode == 'multi') { ?>
+				<th width="200"><strong>Author</strong></th>
+			<?php } ?>
 		</tr>
 		</thead>
 	
@@ -255,8 +271,11 @@ if (isset($_GET['status'])) {
 			<td style="padding:5px"><?php print $row->format; ?></td>
 			<td style="padding:5px"><?php print $row->date; ?></td>
 			<td style="padding:5px"><?php print $row->status; ?></td>
-			<td style="padding:5px" id="authorName"><?php print $row->author; ?></td>
-
+			
+			<?php if ($topicManagerAuthorMode == 'multi') { ?>
+				<td style="padding:5px" id="authorName"><?php print $row->author; ?></td>
+			<?php } ?>
+			
 		</form>
 		</tr>
 		<?php } ?>
@@ -309,8 +328,10 @@ if (isset($_GET['topic'])) {
 		<p><label>Date to Publish:</label><br/>
 		<input type="text" name="date" class="datePicker" style="width:200px" value="<?php print stripslashes($editDetails[0]['date']); ?>"/></p>
 		
-		<p><label>Assigned Author(s):</label><br/>
-		<input type="text" name="author" style="width:200px" value="<?php print stripslashes($editDetails[0]['author']); ?>"/></p>
+		<?php if ($topicManagerAuthorMode == 'multi') { ?>
+			<p><label>Assigned Author(s):</label><br/>
+			<input type="text" name="author" style="width:200px" value="<?php print stripslashes($editDetails[0]['author']); ?>"/></p>
+		<?php } ?>
 		
 		<input type="submit" name="editSubmit" value="Update" />&nbsp;
 		<a href="<?php print $adminURL; ?>admin.php?page=topics">Cancel</a>&nbsp;&nbsp;
@@ -492,8 +513,8 @@ add_action("admin_bar_menu", "topics_customize_menu",999);
 
 function topics_customize_menu(){
 	$topicsShowInAdminBar = get_option('topicsShowInAdminBar'); 
-	// only add menu link for admins
-	if ( current_user_can( 'manage_options' ) && $topicsShowInAdminBar == 'yes') { 
+	
+	if ( $topicsShowInAdminBar == 'yes') { 
 		
 		global $wp_admin_bar;
 		$wp_admin_bar->add_menu(array(
