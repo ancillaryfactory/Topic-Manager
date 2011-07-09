@@ -21,9 +21,9 @@ function topic_manager_options() {
     } else {  
         //Normal page display  
 		
-		$topicsShowInAdminBar = get_option('topicsShowInAdminBar');
-		$topicManagerPermission = get_option('topicManagerPermission');
-		$topicManagerAuthorMode = get_option('topicManagerAuthorMode');  		
+		$topicsShowInAdminBar = get_option('topicsShowInAdminBar','yes');
+		$topicManagerPermission = get_option('topicManagerPermission','admin');
+		$topicManagerAuthorMode = get_option('topicManagerAuthorMode','single');  		
     } 
 
 	if (!current_user_can('manage_options'))  {
@@ -42,7 +42,7 @@ function topic_manager_options() {
 		<div style="height:30px">&nbsp;</div>
 		
 		<h3>Permission to use Topic Manager administrator functions</h3>
-	
+		
 		 <label>
     <input type="radio" name="topicManagerPermission" value="author" id="status_0"
 	<?php if ($topicManagerPermission=='author') {?> checked <?php } ?> />

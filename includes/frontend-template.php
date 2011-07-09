@@ -3,7 +3,7 @@
 function topics_frontend_table() {
 	if ( is_user_logged_in() ) { 
 	
-		$topicManagerAuthorMode = get_option('topicManagerAuthorMode'); 
+		$topicManagerAuthorMode = get_option('topicManagerAuthorMode','single'); 
 		add_action('wp_footer', 'topics_table_toggle');
 	
 		// table function goes here

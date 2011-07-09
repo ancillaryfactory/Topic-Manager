@@ -45,6 +45,7 @@ function topic_activate() {
 	
 	// check for existing options and add if not already set
 	// if an old (pre 1.6) version of the plugin is already installed
+	/*
 	$checkPermission = get_option('topicManagerPermission');
 	if (($checkPermission != 'admin') and ($checkPermission != 'author')) {
 		update_option('topicsShowInAdminBar', 'yes');
@@ -52,6 +53,7 @@ function topic_activate() {
 		update_option('topicManagerAuthorMode', 'single');
 	}
 	
+	*/
 	// first time plugin activation
 	global $wpdb;
 	$table_name = $wpdb->prefix . "topic_manager";
@@ -90,7 +92,7 @@ if ( is_admin() ) {
 }
 
 function topicManagerCheckPermission() {
-	$topicManagerPermission = get_option('topicManagerPermission');
+	$topicManagerPermission = get_option('topicManagerPermission','admin');
 	
 	if ( $topicManagerPermission == 'admin' ) {
 		$topicsPermissionLevel = 'manage_options';
@@ -126,7 +128,7 @@ function topics_admin() {
 
 <?php
 
-$topicManagerAuthorMode = get_option('topicManagerAuthorMode'); 
+$topicManagerAuthorMode = get_option('topicManagerAuthorMode','single'); 
 
 global $wpdb;
 $table_name = $wpdb->prefix . "topic_manager"; 
@@ -512,7 +514,7 @@ add_action("admin_bar_menu", "topics_customize_menu",999);
 
 
 function topics_customize_menu(){
-	$topicsShowInAdminBar = get_option('topicsShowInAdminBar'); 
+	$topicsShowInAdminBar = get_option('topicsShowInAdminBar','yes'); 
 	
 	if ( $topicsShowInAdminBar == 'yes') { 
 		
