@@ -43,6 +43,8 @@ Version 1.8:
 
 * Added single/multi-author options. When the single author option is selected, the Author fields are hidden, along with the option to send a message to another author
 
+* Updated options to set defaults after initial install
+
 Version 1.7.1: 
 
 * New options screen
