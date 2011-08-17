@@ -242,7 +242,8 @@ if (isset($_GET['status'])) {
 	<table class="widefat" cellpadding="15" id="topicTable">
 		<thead>
 		<tr id="topicTableHeader">
-			<th width="250"><strong>Topic</strong></th>
+			<th width="20"><strong>&nbsp;</strong></th>
+			<th width="200"><strong>Topic</strong></th>
 			<th width="150"><strong>Format</strong></th>
 			<th width="100"><strong>Publish Date</strong></th>
 			<th width="100"><strong>Status</strong></th>
@@ -264,11 +265,12 @@ if (isset($_GET['status'])) {
 		?>
 		<!-- <pre><?php// print_r($_GET); ?></pre> -->
 	
-		<tr>
+		<tr class="topicRow">
 		<form method="post" action="admin.php?page=topics" id="topicForm<?php print $id; ?>">
 		<input type="hidden" name="id" value="<?php print $id; ?>" />
+			<td style="padding:5px"><a href="admin.php?page=topics&topic=<?php print $id; ?>" class="topicEditLink">Edit</a></td>
 			<td style="padding:5px">
-				<a href="admin.php?page=topics&topic=<?php print $id; ?>"><?php print stripslashes($row->topic); ?></a>
+				<a href="#" class="descriptionLink"><?php print stripslashes($row->topic); ?></a>
 			</td>
 			<td style="padding:5px"><?php print $row->format; ?></td>
 			<td style="padding:5px"><?php print $row->date; ?></td>
@@ -280,7 +282,17 @@ if (isset($_GET['status'])) {
 			
 		</form>
 		</tr>
-		<?php } ?>
+		
+		<?php if ( !empty($row->description) ) { ?>
+			<tr class="topicDescription">
+				<td style="padding:5px">&nbsp;</td>
+				<td colspan="5">
+					<?php print stripslashes($row->description); ?>
+				</td>
+			</tr>
+		<?php } // end check for description?>
+		
+		<?php }   // end foreach ?>
 		</tbody>
 	</table>
 	<?php if (!$results) {

@@ -31,9 +31,11 @@ jQuery(document).ready(function(){
 		jQuery('#topicTable tr').hover(
 		function() {
 			jQuery(this).addClass('rowHover');
+			jQuery(this).find('.topicEditLink').show();
 		},
 		function() {
 			jQuery(this).removeClass('rowHover');
+			jQuery(this).find('.topicEditLink').hide();
 		}
 		);
 		
@@ -41,6 +43,13 @@ jQuery(document).ready(function(){
 			var answer = confirm('Delete this topic?');
 			if (!(answer)) { return false };
 		});
+		
+		
+		jQuery('tr.topicRow').css('cursor','pointer');
+				
+		
+		
+		
 		
 	//	jQuery('#editForm').submit(function() {
     //var content = jQuery('#pearlContent').val();
