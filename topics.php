@@ -243,7 +243,7 @@ if (isset($_GET['status'])) {
 		<thead>
 		<tr id="topicTableHeader">
 			<th width="20"><strong>&nbsp;</strong></th>
-			<th width="200"><strong>Topic</strong></th>
+			<th width="200"><strong>Topic <em style="font-size:10px">(Click for description)</em></strong></th>
 			<th width="150"><strong>Format</strong></th>
 			<th width="100"><strong>Publish Date</strong></th>
 			<th width="100"><strong>Status</strong></th>
@@ -266,28 +266,33 @@ if (isset($_GET['status'])) {
 		<!-- <pre><?php// print_r($_GET); ?></pre> -->
 	
 		<tr class="topicRow">
-		<form method="post" action="admin.php?page=topics" id="topicForm<?php print $id; ?>">
-		<input type="hidden" name="id" value="<?php print $id; ?>" />
+			<input type="hidden" name="id" value="<?php print $id; ?>" />
 			<td style="padding:5px"><a href="admin.php?page=topics&topic=<?php print $id; ?>" class="topicEditLink">Edit</a></td>
 			<td style="padding:5px">
-				<a href="#" class="descriptionLink"><?php print stripslashes($row->topic); ?></a>
+				<?php if ( !empty($row->description) ) { ?>
+					<a href="#" class="descriptionLink"><?php print stripslashes($row->topic); ?></a>
+				<?php } else { 
+					print stripslashes($row->topic); 
+				} ?>
 			</td>
 			<td style="padding:5px"><?php print $row->format; ?></td>
 			<td style="padding:5px"><?php print $row->date; ?></td>
 			<td style="padding:5px"><?php print $row->status; ?></td>
 			
 			<?php if ($topicManagerAuthorMode == 'multi') { ?>
-				<td style="padding:5px" id="authorName"><?php print $row->author; ?></td>
+				<form method="post" action="admin.php?page=topics" id="topicForm<?php print $id; ?>">
+					<td style="padding:5px" id="authorName"><?php print $row->author; ?></td>
+				</form>
 			<?php } ?>
-			
-		</form>
 		</tr>
 		
 		<?php if ( !empty($row->description) ) { ?>
 			<tr class="topicDescription">
 				<td style="padding:5px">&nbsp;</td>
 				<td colspan="5">
-					<?php print stripslashes($row->description); ?>
+					<p style="width:500px">
+						<?php print stripslashes($row->description); ?>
+					</p>
 				</td>
 			</tr>
 		<?php } // end check for description?>

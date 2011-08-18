@@ -44,12 +44,15 @@ jQuery(document).ready(function(){
 			if (!(answer)) { return false };
 		});
 		
+		jQuery('a.descriptionLink').click(function() {
+			jQuery(this).parent().parent().toggleClass('topicOpenRow');
+			jQuery(this).parent().parent().next('tr.topicDescription').toggle();
+		});
 		
-		jQuery('tr.topicRow').css('cursor','pointer');
-				
-		
-		
-		
+		jQuery('tr.topicDescription').click(function() {
+			jQuery(this).hide();
+			jQuery(this).prev('tr').removeClass('topicOpenRow');
+		});
 		
 	//	jQuery('#editForm').submit(function() {
     //var content = jQuery('#pearlContent').val();
