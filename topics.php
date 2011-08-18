@@ -242,7 +242,7 @@ if (isset($_GET['status'])) {
 	<table class="widefat" cellpadding="15" id="topicTable">
 		<thead>
 		<tr id="topicTableHeader">
-			<th width="20"><strong>&nbsp;</strong></th>
+			<th width="25"><strong>&nbsp;</strong></th>
 			<th width="200"><strong>Topic <em style="font-size:10px">(Click for description)</em></strong></th>
 			<th width="150"><strong>Format</strong></th>
 			<th width="100"><strong>Publish Date</strong></th>
@@ -288,12 +288,16 @@ if (isset($_GET['status'])) {
 		
 		<?php if ( !empty($row->description) ) { ?>
 			<tr class="topicDescription">
-				<td style="padding:5px">&nbsp;</td>
-				<td colspan="5">
-					<p style="width:500px">
-						<?php print stripslashes($row->description); ?>
-					</p>
-				</td>
+				<div class="topicDescriptionWrapper">
+					<td style="padding:5px">&nbsp;</td>
+				</div>
+				<div class="topicDescriptionWrapper">
+					<td colspan="5">
+						<p style="width:500px">
+							<?php print stripslashes($row->description); ?>
+						</p>
+					</td>
+				</div>
 			</tr>
 		<?php } // end check for description?>
 		

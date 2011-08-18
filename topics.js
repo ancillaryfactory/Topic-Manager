@@ -30,12 +30,10 @@ jQuery(document).ready(function(){
 		// adds main table stripe on hover
 		jQuery('#topicTable tr').hover(
 		function() {
-			jQuery(this).addClass('rowHover');
-			jQuery(this).find('.topicEditLink').show();
+			jQuery(this).addClass('rowHover').find('.topicEditLink').show();
 		},
 		function() {
-			jQuery(this).removeClass('rowHover');
-			jQuery(this).find('.topicEditLink').hide();
+			jQuery(this).removeClass('rowHover').find('.topicEditLink').hide();
 		}
 		);
 		
@@ -44,11 +42,12 @@ jQuery(document).ready(function(){
 			if (!(answer)) { return false };
 		});
 		
+		// click title to open/close description
 		jQuery('a.descriptionLink').click(function() {
-			jQuery(this).parent().parent().toggleClass('topicOpenRow');
-			jQuery(this).parent().parent().next('tr.topicDescription').toggle();
+			jQuery(this).parent().parent().toggleClass('topicOpenRow').next('tr.topicDescription').toggle();
 		});
 		
+		// click description row to close
 		jQuery('tr.topicDescription').click(function() {
 			jQuery(this).hide();
 			jQuery(this).prev('tr').removeClass('topicOpenRow');
