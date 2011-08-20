@@ -271,6 +271,7 @@ if (isset($_GET['status'])) {
 			<td style="padding:5px">
 				<?php if ( !empty($row->description) ) { ?>
 					<a href="#" class="descriptionLink"><?php print stripslashes($row->topic); ?></a>
+					<div class="topicDescription"><?php print stripslashes($row->description); ?></div>
 				<?php } else { 
 					print stripslashes($row->topic); 
 				} ?>
@@ -286,20 +287,7 @@ if (isset($_GET['status'])) {
 			<?php } ?>
 		</tr>
 		
-		<?php if ( !empty($row->description) ) { ?>
-			<tr class="topicDescription">
-				<div class="topicDescriptionWrapper">
-					<td style="padding:5px">&nbsp;</td>
-				</div>
-				<div class="topicDescriptionWrapper">
-					<td colspan="5">
-						<p style="width:500px">
-							<?php print stripslashes($row->description); ?>
-						</p>
-					</td>
-				</div>
-			</tr>
-		<?php } // end check for description?>
+		<?php // } // end check for description?>
 		
 		<?php }   // end foreach ?>
 		</tbody>
