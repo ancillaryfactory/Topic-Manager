@@ -14,7 +14,9 @@
 
 .topicEditLink, tr.topicDescription  {display:none;}
 
-.topicOpenRow {background:#d1d1d1;}
-.topicDescription {padding:20px;cursor:pointer;}
-.topicOpenRow {font-weight:bold}
+.topicOpenRow {background:#d1d1d1;font-weight:bold}
+.topicDescription {padding:20px 0;margin-left:40px;width:500px}
 
+.topicRow td {height:51px;}
+
+.descriptionHover {position:absolute;display:block;background:#000;padding:5px;color:#fff}

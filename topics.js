@@ -42,7 +42,9 @@ jQuery(document).ready(function(){
 			if (!(answer)) { return false };
 		});
 		
-		jQuery('.topicDescription').hide();
+		// jQuery('.topicDescription').hide();
+		
+		
 		jQuery('.descriptionLink').click(function() {
 			jQuery(this).next('.topicDescription').slideToggle();
 		});
@@ -51,17 +53,7 @@ jQuery(document).ready(function(){
 			jQuery(this).slideToggle();
 		});
 	
-/*	
-		// click title to open/close description
-		jQuery('a.descriptionLink').click(function() {
-			jQuery(this).parent().parent().toggleClass('topicOpenRow').next('tr.topicDescription').toggle();
-		});
-		
-		// click description row to close
-		jQuery('tr.topicDescription').click(function() {
-			jQuery(this).hide().prev('tr').removeClass('topicOpenRow');
-		});
-*/	
+
 	//	jQuery('#editForm').submit(function() {
     //var content = jQuery('#pearlContent').val();
 			

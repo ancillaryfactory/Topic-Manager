@@ -124,8 +124,6 @@ function topics_admin() {
 <!-- End Success Messages -->
 
 
-
-
 <?php
 
 $topicManagerAuthorMode = get_option('topicManagerAuthorMode','single'); 
@@ -239,14 +237,15 @@ if (isset($_GET['status'])) {
 	
 <?php if (!isset($_GET['topic'])) { ?> <!-- don't show table on topic edit pages -->	
 	<!-- Main Table starts here -->
-	<table class="widefat" cellpadding="15" id="topicTable">
+	<table class="widefat" cellpadding="20" id="topicTable" >
 		<thead>
 		<tr id="topicTableHeader">
-			<th width="25"><strong>&nbsp;</strong></th>
-			<th width="200"><strong>Topic <em style="font-size:10px">(Click for description)</em></strong></th>
-			<th width="150"><strong>Format</strong></th>
-			<th width="100"><strong>Publish Date</strong></th>
-			<th width="100"><strong>Status</strong></th>
+			<th width="50"><strong>&nbsp;</strong></th>
+			<th width="300"><strong>Topic</strong></th>
+			<th width="70"><strong>Format</strong></th>
+			<!--<th width="30%"><strong>Description</strong></th>-->
+			<th width="30"><strong>Publish Date</strong></th>
+			<th width="40"><strong>Status</strong></th>
 			
 			<?php if ($topicManagerAuthorMode == 'multi') { ?>
 				<th width="200"><strong>Author</strong></th>
@@ -267,15 +266,25 @@ if (isset($_GET['status'])) {
 	
 		<tr class="topicRow">
 			<input type="hidden" name="id" value="<?php print $id; ?>" />
-			<td style="padding:5px"><a href="admin.php?page=topics&topic=<?php print $id; ?>" class="topicEditLink">Edit</a></td>
+			<td style="padding:5px">
+				<span class="topicEditLink">
+					<a href="admin.php?page=topics&topic=<?php print $id; ?>" >Edit</a> | <a href="admin.php?page=topics&delete=<?php print $id; ?>">Delete</a><br/>
+					<a href="admin.php?page=topics&draft=<?php print $id; ?>" >Create draft</a>
+				</span>
+			</td>
 			<td style="padding:5px">
 				<?php if ( !empty($row->description) ) { ?>
-					<a href="#" class="descriptionLink"><?php print stripslashes($row->topic); ?></a>
-					<div class="topicDescription"><?php print stripslashes($row->description); ?></div>
-				<?php } else { 
-					print stripslashes($row->topic); 
-				} ?>
+					<strong><?php print stripslashes($row->topic); ?></strong>
+					
+					<div class="topicDescription">
+						<?php print stripslashes($row->description); ?>
+					</div>
+					
+				<?php } else { ?>
+					<strong> <?php print stripslashes($row->topic); ?></strong>
+			<?php	} ?>
 			</td>
+			
 			<td style="padding:5px"><?php print $row->format; ?></td>
 			<td style="padding:5px"><?php print $row->date; ?></td>
 			<td style="padding:5px"><?php print $row->status; ?></td>
@@ -286,8 +295,6 @@ if (isset($_GET['status'])) {
 				</form>
 			<?php } ?>
 		</tr>
-		
-		<?php // } // end check for description?>
 		
 		<?php }   // end foreach ?>
 		</tbody>
@@ -474,7 +481,7 @@ if (isset($_POST['sendSubmit'])) {
 	add_action('admin_init', 'sendAuthorMessage');
 }
 
-if (isset($_POST['deleteSubmit'])) {
+if (isset ($_POST['deleteSubmit'])) {
 	add_action('admin_init', 'deleteTopic');
 }
 
