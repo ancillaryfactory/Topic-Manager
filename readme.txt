@@ -8,8 +8,8 @@ Author URI: http://www.aoa.org
 Author: AOA
 Requires at least: 3.0
 Tested up to: 3.2
-Stable tag: 1.8
-Version: 1.8
+Stable tag: 1.9
+Version: 1.9
 
 A quick way to remember post topics for single or multi-author blogs
 
@@ -39,6 +39,11 @@ Admins can also e-mail authors directly through the interface using an extension
 
 
 == Changelog ==
+Version 1.9:
+
+* Redesigned admin grid for more readability
+* One click to create draft post from topic
+
 Version 1.8:
 
 * Added single/multi-author options. When the single author option is selected, the Author fields are hidden, along with the option to send a message to another author

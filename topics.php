@@ -244,7 +244,7 @@ if (isset($_GET['status'])) {
 			<th width="300"><strong>Topic</strong></th>
 			<th width="70"><strong>Format</strong></th>
 			<!--<th width="30%"><strong>Description</strong></th>-->
-			<th width="30"><strong>Publish Date</strong></th>
+			<th width="30"><strong>Due</strong></th>
 			<th width="40"><strong>Status</strong></th>
 			
 			<?php if ($topicManagerAuthorMode == 'multi') { ?>

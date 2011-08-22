@@ -44,7 +44,7 @@ jQuery(document).ready(function(){
 		
 		// jQuery('.topicDescription').hide();
 		
-		
+		/*
 		jQuery('.descriptionLink').click(function() {
 			jQuery(this).next('.topicDescription').slideToggle();
 		});
@@ -52,7 +52,7 @@ jQuery(document).ready(function(){
 		jQuery('.topicDescription').click(function() {
 			jQuery(this).slideToggle();
 		});
-	
+	*/
 
 	//	jQuery('#editForm').submit(function() {
     //var content = jQuery('#pearlContent').val();
