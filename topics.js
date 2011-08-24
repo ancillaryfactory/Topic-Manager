@@ -37,7 +37,7 @@ jQuery(document).ready(function(){
 		}
 		);
 		
-		jQuery('#deleteSubmit').click(function() {
+		jQuery('.delete').click(function() {
 			var answer = confirm('Delete this topic?');
 			if (!(answer)) { return false };
 		});

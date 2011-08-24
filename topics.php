@@ -121,6 +121,15 @@ function topics_admin() {
 <?php if (!empty($_POST['topic'])) { ?>
 <div class="updated fade"><p><strong><?php _e('New topic added.' ); ?></strong></p></div>  
 <?php } ?>
+
+<?php if (!empty($_GET['delete'])) { ?>
+<div class="updated fade"><p><strong><?php _e('Topic deleted.' ); ?></strong></p></div>  
+<?php } ?>
+
+<?php if (!empty($_GET['draft'])) { ?>
+<div class="updated fade"><p><strong>Draft post created. <a href="<?php echo get_admin_url(); ?>edit.php">View draft</s></strong></p></div>  
+<?php } ?>
+
 <!-- End Success Messages -->
 
 
@@ -268,7 +277,7 @@ if (isset($_GET['status'])) {
 			<input type="hidden" name="id" value="<?php print $id; ?>" />
 			<td style="padding:5px">
 				<span class="topicEditLink">
-					<a href="admin.php?page=topics&topic=<?php print $id; ?>" >Edit</a> | <a href="admin.php?page=topics&delete=<?php print $id; ?>">Delete</a><br/>
+					<a href="admin.php?page=topics&topic=<?php print $id; ?>" >Edit</a> | <a href="admin.php?page=topics&delete=<?php print $id; ?>" class="delete">Delete</a><br/>
 					<a href="admin.php?page=topics&draft=<?php print $id; ?>" >Create draft</a>
 				</span>
 			</td>
@@ -353,7 +362,7 @@ if (isset($_GET['topic'])) {
 		
 		<input type="submit" name="editSubmit" value="Update" />&nbsp;
 		<a href="<?php print $adminURL; ?>admin.php?page=topics">Cancel</a>&nbsp;&nbsp;
-		<input type="submit" name="deleteSubmit" id="deleteSubmit" value="Delete this topic" />
+		<input type="submit" name="deleteSubmit" class="delete" id="deleteSubmit" value="Delete this topic" />
 		
 	</form>
 	
@@ -400,10 +409,41 @@ function deleteTopic() {
 	$topicID = $_POST['id'];
 	
 	$wpdb->query("DELETE FROM $table_name WHERE id = '$topicID'");
+}
+
+function deleteTopicDash() {
+		
+	global $wpdb;
+	$table_name = $wpdb->prefix . "topic_manager"; 
+	$topicID = $_GET['delete'];
 	
-	
+	$wpdb->query("DELETE FROM $table_name WHERE id = '$topicID'");
 }
 /////////////////// END DELETE TOPIC FORM //////////////////////////////////////////////////////
+
+
+/////////////////// CREATE DRAFT FUNCTION //////////////////////////////////////////////////////
+function topicsCreateDraft() {
+	$newDraftID = $_GET['draft'];
+	$table_name = $wpdb->prefix . "topic_manager"; 
+	global $wpdb;
+	
+	$createDraft = $wpdb->get_results( "SELECT topic, description FROM $table_name WHERE id = '$newDraftID' ", ARRAY_A );
+	
+	// Create draft post object
+  $draft_post = array(
+     'post_title' => $createDraft[0]['topic'],
+     'post_content' =>$createDraft[0]['description'],
+     'post_status' => 'draft',
+     'post_author' => 1
+  );
+
+  $newPost = wp_insert_post( $draft_post );
+}
+
+
+
+/////////////////// END CREATE DRAFT FUNCTION //////////////////////////////////////////////////////
 
 
 ////////////////// ADD AUTHOR TO TOPIC FORM /////////////////////////////////////////////////
@@ -481,10 +521,17 @@ if (isset($_POST['sendSubmit'])) {
 	add_action('admin_init', 'sendAuthorMessage');
 }
 
-if (isset ($_POST['deleteSubmit'])) {
+if (isset($_POST['deleteSubmit'])) {
 	add_action('admin_init', 'deleteTopic');
 }
 
+if (isset($_GET['delete'])) {
+	add_action('admin_init', 'deleteTopicDash');
+}
+
+if (isset($_GET['draft'])) {
+	add_action('admin_init', 'topicsCreateDraft');
+}
 
 function topics_admin_actions() {  
 	$topics_permission = topicManagerCheckPermission();
