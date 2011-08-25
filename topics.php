@@ -127,7 +127,7 @@ function topics_admin() {
 <?php } ?>
 
 <?php if (!empty($_GET['draft'])) { ?>
-<div class="updated fade"><p><strong>Draft post created. <a href="<?php echo get_admin_url(); ?>edit.php">View draft</s></strong></p></div>  
+<div class="updated fade"><p><strong>Draft post created. <a href="<?php echo get_admin_url(); ?>edit.php">View draft</a></strong></p></div>  
 <?php } ?>
 
 <!-- End Success Messages -->
@@ -424,21 +424,23 @@ function deleteTopicDash() {
 
 /////////////////// CREATE DRAFT FUNCTION //////////////////////////////////////////////////////
 function topicsCreateDraft() {
-	$newDraftID = $_GET['draft'];
-	$table_name = $wpdb->prefix . "topic_manager"; 
 	global $wpdb;
+	$newDraftID = $_GET['draft'];
+	$table_name = $wpdb->prefix . "topic_manager";
+	$draftAuthor = get_current_user_id();
 	
-	$createDraft = $wpdb->get_results( "SELECT topic, description FROM $table_name WHERE id = '$newDraftID' ", ARRAY_A );
+	$createDraft = $wpdb->get_row( "SELECT topic, description FROM $table_name WHERE id = '$newDraftID' " );
 	
 	// Create draft post object
   $draft_post = array(
-     'post_title' => $createDraft[0]['topic'],
-     'post_content' =>$createDraft[0]['description'],
+     'post_title' => $createDraft->topic,
+     'post_content' =>$createDraft->description,
      'post_status' => 'draft',
-     'post_author' => 1
+     'post_author' => $draftAuthor
   );
 
-  $newPost = wp_insert_post( $draft_post );
+ $newPost = wp_insert_post( $draft_post );
+  
 }
 
 
